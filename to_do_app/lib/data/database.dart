@@ -21,22 +21,5 @@ class ToDoDataBase {
   void updateDataBase() {
     _myBox.put("TODOLIST", toDoList);
   }
-
-  List toDoListComplete = [];
-
-  
-
-  void createInitialDataComplete(){
-    toDoListComplete = [
-    ];
-  }
-
-  void loadDataComplete() {
-    toDoListComplete = _myBox.get("TODOLISTCOMPLETE");
-  }
-
-  void updateDataBaseComplete() {
-    _myBox.put("TODOLISTCOMPLETE", toDoListComplete);
-  }
   
 }
