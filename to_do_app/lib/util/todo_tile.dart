@@ -8,7 +8,7 @@ class ToDoTile extends StatelessWidget {
   Function(bool?)? onChanged;
   Function(BuildContext)? deleteFunction;
 
-  ToDoTile( {
+  ToDoTile({
     super.key,
     required this.taskName,
     required this.taskCompleted,
@@ -56,14 +56,23 @@ class ToDoTile extends StatelessWidget {
                 data: ThemeData(
                     checkboxTheme: CheckboxThemeData(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(18),
                   ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 )),
-                child: Checkbox(
-                  value: taskCompleted,
-                  onChanged: onChanged,
-                  activeColor: const Color.fromARGB(255, 149, 118, 233),
+                child: Transform.scale(
+                  scale: 2.5,
+                  child: Checkbox(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 149, 118, 233),
+                    ),
+                    value: taskCompleted,
+                    onChanged: onChanged,
+                    // materialTapTargetSize: MaterialTapTargetSize.padded,
+                    activeColor: const Color.fromARGB(255, 149, 118, 233),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                    
+                  ),
                 ),
               ),
             ],
