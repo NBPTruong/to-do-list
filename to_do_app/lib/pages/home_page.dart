@@ -42,10 +42,11 @@ class _HomePageState extends State<HomePage> {
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       db.toDoList[index][1] = !db.toDoList[index][1];
-      if (value == true) {
-        db.toDoListComplete.add(db.toDoList[index]);
-        db.toDoList.removeAt(index);
-      }
+      // if (value == true) {
+      //   db.toDoListComplete.add(db.toDoList[index]);
+      //   db.toDoList.removeAt(index);
+      //   db.updateDataBase();
+      // }
     });
     db.updateDataBase();
   }
@@ -56,9 +57,10 @@ class _HomePageState extends State<HomePage> {
       if (value == false) {
         db.toDoList.add(db.toDoListComplete[index]);
         db.toDoListComplete.removeAt(index);
+        db.updateDataBaseComplete();
       }
     });
-    db.loadDataComplete();
+    db.updateDataBaseComplete();
   }
 
   //save new task
@@ -119,19 +121,19 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: db.toDoListComplete.isEmpty
-      ? ListView.builder(
-              itemCount: db.toDoList.length,
-              itemBuilder: (context, index) {
-                return ToDoTile(
-                  taskName: db.toDoList[index][0],
-                  taskCompleted: db.toDoList[index][1],
-                  onChanged: (value) => checkBoxChanged(value, index),
-                  deleteFunction: (context) => deleteTask(index),
-                );
-              },
-            )
-      : Column(
+      // body: db.toDoListComplete.isEmpty
+      // ? ListView.builder(
+      //         itemCount: db.toDoList.length,
+      //         itemBuilder: (context, index) {
+      //           return ToDoTile(
+      //             taskName: db.toDoList[index][0],
+      //             taskCompleted: db.toDoList[index][1],
+      //             onChanged: (value) => checkBoxChanged(value, index),
+      //             deleteFunction: (context) => deleteTask(index),
+      //           );
+      //         },
+      //       )
+      body: Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -146,25 +148,25 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          const Text('To Do List Completed',
-            style: TextStyle(
-              color: Color.fromARGB(255, 149, 118, 233),
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )),
-          Expanded(
-            child: ListView.builder(
-              itemCount: db.toDoListComplete.length,
-              itemBuilder: (context, index) {
-                return ToDoTile(
-                  taskName: db.toDoListComplete[index][0],
-                  taskCompleted: db.toDoListComplete[index][1],
-                  onChanged: (value) => checkBoxChangedComplete(value, index),
-                  deleteFunction: (context) => deleteTaskComplete(index),
-                );
-              },
-            ),
-          ),
+          // const Text('To Do List Completed',
+          //   style: TextStyle(
+          //     color: Color.fromARGB(255, 149, 118, 233),
+          //     fontSize: 20,
+          //     fontWeight: FontWeight.bold,
+          //   )),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: db.toDoListComplete.length,
+          //     itemBuilder: (context, index) {
+          //       return ToDoTile(
+          //         taskName: db.toDoListComplete[index][0],
+          //         taskCompleted: db.toDoListComplete[index][1],
+          //         onChanged: (value) => checkBoxChangedComplete(value, index),
+          //         deleteFunction: (context) => deleteTaskComplete(index),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );
