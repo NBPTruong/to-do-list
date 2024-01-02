@@ -63,8 +63,30 @@ class _HomePageState extends State<HomePage> {
     db.updateDataBaseComplete();
   }
 
+  bool isTaskContentEmpty(String content) {
+  return content.trim().isEmpty;
+}
+
   //save new task
   void saveNewTask(){
+  if (isTaskContentEmpty(_controller.text)) {
+    // Hiển thị thông báo lỗi, ví dụ:
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Lỗi'),
+          content: const Text('Nội dung task không được để trống.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  } else {
     setState(() {
       db.toDoList.add([_controller.text, false]);
       _controller.clear();
@@ -72,6 +94,8 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
     db.updateDataBase();
   }
+}
+
 
   //create a new task
   void createNewTask() {
