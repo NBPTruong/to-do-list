@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_app/data/database.dart';
@@ -100,11 +102,18 @@ class _HomePageState extends State<HomePage> {
   for (int index = 0; index < db.toDoList.length; index++) {
     if (db.toDoList[index][1] == false) {
       widgets.add(
-        ToDoTile(
-          taskName: db.toDoList[index][0],
-          taskCompleted: db.toDoList[index][1],
-          onChanged: (value) => checkBoxChanged(value, index),
-          deleteFunction: (context) => deleteTask(index),
+        ExpansionTile(
+          // backgroundColor: Colors.grey[200],
+          title: ToDoTile(
+            taskName: db.toDoList[index][0],
+            taskCompleted: db.toDoList[index][1],
+            onChanged: (value) => checkBoxChanged(value, index),
+            deleteFunction: (context) => deleteTask(index),
+          ),
+          trailing: const Text(' '),
+          children: const [
+            Text('00:00:00'),
+          ],
         ),
       );
     }
@@ -114,11 +123,14 @@ class _HomePageState extends State<HomePage> {
   bool hasCompletedTasks = db.toDoList.any((task) => task[1] == true);
   if (hasCompletedTasks) {
     widgets.add(
-      const Text('Task completed',
-        style: TextStyle(
-          color: Color.fromARGB(255, 149, 118, 233),
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+      const Padding(
+        padding: EdgeInsets.only(left: 25, top: 10),
+        child: Text('Task completed',
+          style: TextStyle(
+            color: Color.fromARGB(255, 149, 118, 233),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
