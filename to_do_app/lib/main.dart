@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/pages/home_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:to_do_app/pages/splash_screen.dart';
 
 void main() async {
 
@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
-

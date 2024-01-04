@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class ButtonBasic extends StatelessWidget {
@@ -17,7 +18,11 @@ class ButtonBasic extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       // ignore: sort_child_properties_last
-      child: Text(text),
+      child: Text(text,
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                ),
+            ),
       color: Theme.of(context).primaryColor,
     );
   }

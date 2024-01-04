@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class ToDoTile extends StatelessWidget {
@@ -35,7 +36,7 @@ class ToDoTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: Colors.grey[100],
             borderRadius: BorderRadius.circular(5),
           ),
           child: Row(
@@ -43,7 +44,7 @@ class ToDoTile extends StatelessWidget {
             children: [
               Text(
                 taskName,
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                   decoration: taskCompleted
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
@@ -69,8 +70,8 @@ class ToDoTile extends StatelessWidget {
                     onChanged: onChanged,
                     // materialTapTargetSize: MaterialTapTargetSize.padded,
                     activeColor: const Color.fromARGB(255, 149, 118, 233),
-                    visualDensity:
-                        const VisualDensity(horizontal: -4, vertical: -4),
+                    // visualDensity:
+                    //     const VisualDensity(horizontal: -4, vertical: -4),
                     
                   ),
                 ),

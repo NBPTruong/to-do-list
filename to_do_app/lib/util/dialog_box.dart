@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/util/button_basic.dart';
 
 // ignore: must_be_immutable
@@ -27,9 +28,14 @@ class DialogBox extends StatelessWidget {
             children: [
               TextField(
                   controller: controller,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter task name',
+                    hintStyle: GoogleFonts.roboto(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                      fontStyle: FontStyle.italic,
+                    ),
                   )),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 ButtonBasic(text: "Save", onPressed: onSave),

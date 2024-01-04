@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_app/data/database.dart';
 import 'package:to_do_app/util/dialog_box.dart';
@@ -46,17 +45,34 @@ class _HomePageState extends State<HomePage> {
   //save new task
   void saveNewTask() {
     if (isTaskContentEmpty(_controller.text)) {
-      // Hiển thị thông báo lỗi, ví dụ:
+      // Hiển thị thông báo lỗi
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Lỗi'),
-            content: const Text('Nội dung task không được để trống.'),
+            title: Text(
+              'Error',
+              style: GoogleFonts.roboto(
+                color: Color.fromARGB(255, 149, 118, 233),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text(
+              'Task content cannot be left blank.',
+              style: GoogleFonts.roboto(
+                color: Color.fromARGB(255, 149, 118, 233),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
+                child: Text(
+                  'OK',
+                  style: GoogleFonts.roboto(),
+                ),
               ),
             ],
           );
@@ -95,49 +111,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
- Widget build(BuildContext context) {
-  List<Widget> widgets = [];
+  Widget build(BuildContext context) {
+    List<Widget> widgets = [];
 
-  // Hiển thị công việc chưa hoàn thành
-  for (int index = 0; index < db.toDoList.length; index++) {
-    if (db.toDoList[index][1] == false) {
-      widgets.add(
-        ExpansionTile(
-          // backgroundColor: Colors.grey[200],
-          title: ToDoTile(
-            taskName: db.toDoList[index][0],
-            taskCompleted: db.toDoList[index][1],
-            onChanged: (value) => checkBoxChanged(value, index),
-            deleteFunction: (context) => deleteTask(index),
-          ),
-          trailing: const Text(' '),
-          children: const [
-            Text('00:00:00'),
-          ],
-        ),
-      );
-    }
-  }
-
-  // Hiển thị "Task completed"
-  bool hasCompletedTasks = db.toDoList.any((task) => task[1] == true);
-  if (hasCompletedTasks) {
-    widgets.add(
-      const Padding(
-        padding: EdgeInsets.only(left: 25, top: 10),
-        child: Text('Task completed',
-          style: TextStyle(
-            color: Color.fromARGB(255, 149, 118, 233),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-
-    // Hiển thị công việc đã hoàn thành
+    // Hiển thị công việc chưa hoàn thành
     for (int index = 0; index < db.toDoList.length; index++) {
-      if (db.toDoList[index][1] == true) {
+      if (db.toDoList[index][1] == false) {
         widgets.add(
           ToDoTile(
             taskName: db.toDoList[index][0],
@@ -148,40 +127,75 @@ class _HomePageState extends State<HomePage> {
         );
       }
     }
-  }
 
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      title: const Text('To Do List',
-        style: TextStyle(
-          color: Color.fromARGB(255, 149, 118, 233),
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: createNewTask,
-          icon: const Icon(Icons.add,
-              color: Color.fromARGB(255, 149, 118, 233), size: 32),
-        ),
-          const SizedBox(width: 25),
-      ],
-    ),
-    body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: ListView(
-            children: widgets,
+    // Hiển thị "Task completed"
+    bool hasCompletedTasks = db.toDoList.any((task) => task[1] == true);
+    if (hasCompletedTasks) {
+      widgets.add(
+        Padding(
+          padding: EdgeInsets.only(left: 25, top: 10),
+          child: Text(
+            'Task completed',
+            style: GoogleFonts.roboto(
+              color: Color.fromARGB(255, 149, 118, 233),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ],
-    ),
-  );
-}
+      );
 
+      // Hiển thị công việc đã hoàn thành
+      for (int index = 0; index < db.toDoList.length; index++) {
+        if (db.toDoList[index][1] == true) {
+          widgets.add(
+            ToDoTile(
+              taskName: db.toDoList[index][0],
+              taskCompleted: db.toDoList[index][1],
+              onChanged: (value) => checkBoxChanged(value, index),
+              deleteFunction: (context) => deleteTask(index),
+            ),
+            // trailing: const Text(''),
+            // children: const [
+            //   Text('00:00:00'),
+            // ],
+          );
+        }
+      }
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'To Do List',
+          style: GoogleFonts.roboto(
+            color: Color.fromARGB(255, 149, 118, 233),
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: createNewTask,
+            icon: const Icon(Icons.add,
+                color: Color.fromARGB(255, 149, 118, 233), size: 32),
+          ),
+          const SizedBox(width: 25),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: ListView(
+              children: widgets,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
