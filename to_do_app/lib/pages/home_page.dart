@@ -178,12 +178,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: createNewTask,
-            icon: const Icon(Icons.add,
-                color: Color.fromARGB(255, 149, 118, 233), size: 32),
+          Container(
+            margin: const EdgeInsets.only(right: 25),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey[100],
+            ),
+            child: IconButton(
+              onPressed: createNewTask,
+              icon: const Icon(Icons.add,
+                  color: Color.fromARGB(255, 149, 118, 233), size: 32),
+            ),
           ),
-          const SizedBox(width: 25),
+          // const SizedBox(width: 25),
         ],
       ),
       body: Column(
