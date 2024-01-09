@@ -61,8 +61,13 @@ class ToDoTile extends StatelessWidget {
                   ),
                 )),
                 child: Transform.scale(
-                  scale: 2.5,
+                  scale: 2,
                   child: Checkbox(
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    visualDensity: VisualDensity(
+                      horizontal: -3.5,
+                      vertical: -3.5,
+                    ),
                     side: const BorderSide(
                       color: Color.fromARGB(255, 149, 118, 233),
                     ),
