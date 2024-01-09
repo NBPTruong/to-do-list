@@ -19,7 +19,7 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: const Color.fromARGB(255, 180, 158, 240),
+      backgroundColor: Colors.white,
       // ignore: sized_box_for_whitespace
       content: Container(
           height: 120,
@@ -33,6 +33,7 @@ class DialogBox extends StatelessWidget {
                     hintText: 'Enter task name',
                     hintStyle: GoogleFonts.roboto(
                       fontSize: 18,
+                      color: Colors.grey,
                       fontWeight: FontWeight.w300,
                       fontStyle: FontStyle.italic,
                     ),

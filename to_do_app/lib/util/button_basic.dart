@@ -20,7 +20,8 @@ class ButtonBasic extends StatelessWidget {
       // ignore: sort_child_properties_last
       child: Text(text,
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
+                  fontSize: 14,
+                  color: Colors.white,
                 ),
             ),
       color: Theme.of(context).primaryColor,
