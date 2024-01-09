@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontSize: 13),
         ),
         backgroundColor: const Color.fromARGB(255, 149, 118, 233),
-        duration: Duration(seconds: 3), // Thiết lập thời gian hiển thị (3 giây trong trường hợp này)
+        duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
